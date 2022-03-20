@@ -9,7 +9,9 @@ const dbConnection = require('./Config/dbConn')
 const register = require('./Routes/users')
 const projects = require('./Routes/projects')
 const actions = require("./Routes/actions");
+const authenticate = require("./Routes/autheniticated");
 const mongoose = require('mongoose')
+
 
 
 dbConnection();
@@ -35,13 +37,11 @@ app.use( (req, res, next)=>{
 app.get('/', (req, resp) => {
     resp.sendFile(__dirname + "/Views/index.html")
 })
-// app.post('/users', function (req, resp){
-//     console.log(req.body)
-//     resp.send("this works")
-// })
+
 app.use("/users", register);
 app.use("/project", projects);
 app.use("/action", actions);
+app.use("/authenticate", authenticate)
 
 mongoose.connection.once('open', () => {
     console.log("Database connection successful")
