@@ -31,5 +31,31 @@ async function registerActions(req, resp) {
 }
 
 
+async function getAllActions(res, resp){
+  console.log("getAllActions");
+  const allAction = await Action.find();
+  resp.status(200).json({
+    message:allAction
+  });
 
-module.exports = { registerActions };
+};
+
+async function getActionById(res, resp){
+  
+    const id = res.params.id;
+    const action = await Action.findById(id)
+    if(action){
+         resp.status(200).json({
+           message: action,
+         });
+    }else{
+        resp.status(404).json({
+          message: `action with id ${id} not found`,
+        });
+    }
+ 
+ 
+};
+
+
+module.exports = { registerActions, getAllActions, getActionById };
