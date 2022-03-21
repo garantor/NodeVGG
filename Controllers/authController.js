@@ -25,6 +25,7 @@ async function authenticateUser(req, resp){
         };
         jwt.sign({ users }, secretKey, (err, token) => {
           resp.json({
+            user:userFind.username,
             message: "message",
             token: token,
           });

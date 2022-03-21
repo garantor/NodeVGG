@@ -63,12 +63,10 @@
                 and Actions.</p>
                 <ul>
                     <li>A model for Users, Projects, and Actions</li>
-                    <li>A model for Users, Projects, and Actions</li>
-                    <li>A model for Users, Projects, and Actions</li>
-                    <li>Users using a POST request</li>
-                    <li> a Project Using a POST Request</li>
+                    <li>Create Users using a POST request</li>
+                    <li> Create a Project Using a POST Request</li>
                     <li>Create Actions using a POST Request</li>
-                    <li>Authrnticate users and generate token</li>
+                    <li>Authenticate users and generate token</li>
                     <li>Get all Projects Using a GET Request</li>
                     <li>Get a project by id</li>
                     <li>Update an existing project using a PUT Request</li>
@@ -76,8 +74,6 @@
                     <li>Delete a project using DELETE</li>
                     <li>Create actions using POST</li>
                     <li>Get list of all Actions using GET</li>
-                    <li>Get a sing action by it ID</li>
-                    <li>Delete an action that belong to a project using action ID</li>
                 </ul>
             </section>
             <hr>
@@ -97,6 +93,7 @@
                         <tr>
                             <th>Method</th>
                             <th>Path</th>
+                            <th>Arguments</th>
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -104,41 +101,87 @@
                         <tr>
                             <td>GET</td>
                             <td>/</td>
+                            <td>Not Require</td>
                             <td>This page. <em>HTML response.</em></td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/users</td>
+                            <td>Not Require</td>
+                            <td>This will return list of available user in this format <code>{"message": data}</code>. <em>JSON
+                                    response.</em></td>
                         </tr>
                     
                         <tr>
-                            <td>GET</td>
-                            <td>/routes/json</td>
-                            <td>Will return example JSON data in the form of <code>{"message": data}</code>. <em>JSON
+                            <td>POST</td>
+                            <td>/users</td>
+                            <td>username <br>password</td>
+                                <td>Return user object in this format <code>{"username":your_email, "password":encrypted_password, _id:Unique_id}</code></td>
+                            
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>/authenticate</td>
+                            <td>username <br>password</td>
+                            <td>This Will return the current user, message and token <code>{"user": user_email, message:"message", token:jwt_token}</code>. <em>JSON
                                     response.</em></td>
                         </tr>
                         <tr>
                             <td>GET</td>
-                            <td>/routes/time</td>
-                            <td>Will return the current date and time in JSON <code>{"time": datetime}</code>. <em>JSON
-                                    response.</em></td>
+                            <td>/action</td>
+                            <td>Not Require</td>
+
+                            <td>This Will return all actions available in this format <code>{message:action_list</code> parameter
+                               
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>/action</td>
+                            <td>project_id <br>description<br>note</td>
+                            <td>Will return the newly create action object in JSON format.</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>/action/id</td>
+                            <td>ID require</td>
+                            <td>Will return a single action that match the id send in JSON format</td>
                         </tr>
                         <tr>
                             <td>GET</td>
-                            <td>/:word/echo</td>
-                            <td>Will return JSON that echoes the <code>:word</code> parameter
-                                <code>{"echo": word}</code>. <em>JSON response.</em></td>
-                        </tr>
-                        <tr>
-                            <td>GET, POST</td>
-                            <td>/routes/name?first=param&last=param</td>
-                            <td>Will return the first and last name parameters in requested response format.</td>
+                            <td>/project</td>
+                            <td>not Require</td>
+                            <td>Will return all project in Json format.</td>
                         </tr>
                         <tr>
                             <td>GET</td>
-                            <td>/routes/name/about</td>
-                            <td>Will return a description of the /routes/name endpoint.</td>
+                            <td>/project/id</td>
+                            <td>id <br> Require as query parameter </td>
+                            <td>This will create a new project Object and return it in a JSON format </td>
                         </tr>
                         <tr>
-                            <td>GET, POST, PUT</td>
-                            <td>/routes/echo-all?key1=param&key2=param</td>
-                            <td>Will return all parameters in requested response format.</td>
+                            <td>POST</td>
+                            <td>/project</td>
+                            <td>name <br> description <br>note</td>
+                            <td>This will create a new project Object and return it in a JSON format </td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td>/project/id</td>
+                            <td>name <br> description <br>complete</td>
+                            <td>This will update an existing project with the specified id and return the update object in this format <code>{message:data}</code> </td>
+                        </tr>
+                        <tr>
+                            <td>PATCH</td>
+                            <td>/project/id</td>
+                            <td>name <br> description <br>complete</td>
+                            <td>This will update an existing project with the specified id and return the update object in this format
+                                <code>{message:data}</code> </td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>/project/id</td>
+                            <td>id <br> Require as query parameter </td>
+                            <td>This will delete an existing project with the specified </td>
                         </tr>
                     </tbody>
                 </table>
@@ -152,18 +195,19 @@
                     All suggestions are welcome. This simple RESTful API is intended to be an
                     example web service for students.
                 </p>
-                <a href="https://github.com/gitdagray/rest_api_basics" target="_blank">
+                <a href="https://github.com/garantor/NodeVGG" target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://youtube.com/davegrayteachescode" target="_blank">
-                    <i class="fab fa-youtube-square"></i>
-                </a>
-                <a href="https://twitter.com/yesdavidgray" target="_blank">
+                <a href="https://twitter.com/Har4labiM" target="_blank">
                     <i class="fab fa-twitter-square"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/davidagray/" target="_blank">
+                <a href="https://www.linkedin.com/in/afolabisunday/" target="_blank">
                     <i class="fab fa-linkedin"></i>
                 </a>
+            </section>
+            <section>
+                <h3>Thanks</h3>
+                <p>Special thanks to <a href="https://twitter.com/yesdavidgray" target="_blank"> Gray </a> for Providing us with this template. </p>
             </section>
         </section>
     </main>
